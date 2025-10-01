@@ -81,3 +81,15 @@ footer{background:transparent}
 *::-webkit-scrollbar{height:10px;width:10px}
 *::-webkit-scrollbar-thumb{background:rgba(127,127,127,.45); border-radius:999px}
 *::-webkit-scrollbar-track{background:rgba(127,127,127,.15)}
+
+/* Pricing */
+.pricing-card{border:1px solid rgba(255,255,255,0.08); box-shadow: var(--shadow);}
+.pricing-card .price{font-weight:800; font-size:1.25rem}
+.pricing-card.featured{position:relative; border-color: rgba(13,202,240,.4); box-shadow:0 10px 30px rgba(13,202,240,.15)}
+.pricing-card.featured::after{content:"Meest gekozen"; position:absolute; top:12px; right:12px; font-size:.75rem; letter-spacing:.04em;
+  background:linear-gradient(90deg, rgba(13,202,240,.15), rgba(111,66,193,.15)); color:#9fdff0; border:1px solid rgba(13,202,240,.35);
+  padding:4px 8px; border-radius:999px}
+
+/* Floating CTA */
+.floating-cta{position:fixed; right:24px; bottom:24px; z-index:1030; box-shadow:0 10px 24px rgba(0,0,0,.4)}
+.floating-cta:hover{transform:translateY(-1px)}
