@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400&display=swap');
+:root{--pink:#f7c6d4;--deep:#d63384}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:#222;background:#fff}
+.bg-soft{background:linear-gradient(180deg,#fff,#fff6f8)}
+.btn-outline-pink{border-color:rgba(214,51,132,0.12);color:var(--deep)}
+.btn-pink{background:var(--deep);color:#fff;border:none}
+.hero{background-image:linear-gradient(90deg, rgba(247,198,212,0.35), rgba(255,255,255,0.0));}
+.rounded-circle{object-fit:cover}

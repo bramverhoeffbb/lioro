@@ -1,0 +1,18 @@
+:root{ --vd-blue:#0b5ed7; --vd-blue-2:#084bb6; --vd-accent:#ffb703; --vd-muted:#fafafb }
+*{box-sizing:border-box}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;margin:0;background:#f7f9fb;color:#0f172a}
+.navbar.bg-vd{background:linear-gradient(90deg,var(--vd-blue),var(--vd-blue-2)) !important}
+.hero-vd{background:linear-gradient(180deg, rgba(11,94,215,0.9), rgba(10,60,130,0.85)); padding:64px 0}
+.hero-vd .lead{color:rgba(255,255,255,0.92)}
+.btn-cta{background:var(--vd-accent);border:none;color:#000}
+.btn-cta:hover{transform:translateY(-2px)}
+.hero-image{border-radius:12px}
+.service-card{border-radius:12px}
+.service-card .card-title{color:var(--vd-blue)}
+.card{border-radius:12px}
+.review-card{border-radius:12px}
+form.bg-white{background:#ffffff}
+@media (max-width:767.98px){
+	.hero-vd{padding:40px 0}
+	.hero-image{display:none}
+}

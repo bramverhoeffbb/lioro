@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://bramverhoeffbb.github.io/lioro/sitemap.xml
+# Cache hints are better set at the server (GitHub Pages uses standard headers)

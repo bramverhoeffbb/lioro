@@ -7,6 +7,49 @@
   <meta name="description" content="Lioro — Ik bouw futuristische, high‑performance websites met een moderne look." />
     <meta name="theme-color" content="#FFC83D" />
   
+  <!-- Performance: preconnect & dns-prefetch -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Lioro — Futuristische Webstudio" />
+  <meta property="og:description" content="Ik bouw futuristische, high-performance websites met een moderne look." />
+  <meta property="og:image" content="https://bramverhoeffbb.github.io/lioro/assets/img/logo.svg" />
+  <meta property="og:url" content="https://bramverhoeffbb.github.io/lioro/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Lioro — Futuristische Webstudio" />
+  <meta name="twitter:description" content="Ik bouw futuristische, high-performance websites met een moderne look." />
+  <meta name="twitter:image" content="https://bramverhoeffbb.github.io/lioro/assets/img/logo.svg" />
+
+  <!-- JSON-LD structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "Lioro",
+        "url": "https://bramverhoeffbb.github.io/lioro/",
+        "logo": "https://bramverhoeffbb.github.io/lioro/assets/img/logo.svg"
+      },
+      {
+        "@type": "WebSite",
+        "name": "Lioro",
+        "url": "https://bramverhoeffbb.github.io/lioro/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://bramverhoeffbb.github.io/lioro/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
+  }
+  </script>
+  
   <!-- Favicon (external SVG file) -->
   <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
   <link rel="manifest" href="/site.webmanifest">
@@ -26,6 +69,8 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="100" tabindex="0">
+  <!-- Skip link for keyboard users -->
+  <a class="visually-hidden-focusable" href="#main">Skip to content</a>
   <!-- Background visuals removed for a cleaner, modern look -->
 
   <!-- Navbar -->
@@ -49,33 +94,57 @@
           <li class="nav-item"><a class="nav-link" href="#over">Over</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
+        <!-- Reduced motion toggle: lets users override OS preference. Persisted via JS -->
+        <div class="ms-3 d-flex align-items-center">
+          <button id="motionToggle" class="btn btn-sm btn-outline-secondary" aria-pressed="false" title="Toggle animaties" aria-label="Toggle animaties">
+            <i class="bi bi-lightning-charge"></i>
+          </button>
+        </div>
       </div>
     </div>
   </nav>
 
+  <main id="main">
   <!-- Hero -->
   <header id="hero" class="min-vh-100 d-flex align-items-center position-relative overflow-hidden">
+    <!-- Decorative animated blob behind hero to add depth and energy -->
+    <div class="hero-blob" aria-hidden="true"></div>
     <div class="container position-relative">
-      <div class="row justify-content-center text-center align-items-center">
-        <div class="col-lg-10 col-xl-8 mx-auto">
-          <h1 class="hero-title fw-800 reveal-up" data-watermark="Lioro"><span class="accent-underline">Lioro</span></h1>
-          <p class="lead text-muted-neo mb-4 reveal-up" style="--reveal-delay:120ms">
-            Ik ontwerp en ontwikkel moderne websites met performance, animaties en merkbeleving in het DNA.
-          </p>
-          <div class="d-flex justify-content-center gap-3 reveal-up" style="--reveal-delay:220ms">
-            <a href="#pricing" class="btn btn-primary"><i class="bi bi-cart-check me-2"></i>Pakketten</a>
-            <a href="#portfolio" class="btn btn-outline-secondary"><i class="bi bi-stars me-2"></i>Bekijk werk</a>
+      <!-- Split hero: left = content, right = visual/art -->
+      <div class="row align-items-center g-0">
+        <div class="col-lg-6 hero-left py-6">
+          <div class="px-3 px-lg-0">
+            <!-- Hero headline: accent underline + typewriter for motion on load -->
+            <h1 class="hero-title fw-800 reveal-up neon-strong" data-watermark="Lioro">
+              <span class="accent-underline typewriter" id="heroType">Lioro</span><span class="cursor cursor--hero"></span>
+            </h1>
+            <p class="lead text-muted-neo mb-4 reveal-up" style="--reveal-delay:120ms">
+              Ik ontwerp en ontwikkel moderne websites met performance, animaties en merkbeleving in het DNA.
+            </p>
+            <div class="d-flex gap-3 reveal-up" style="--reveal-delay:220ms">
+              <!-- CTA buttons with pulse and energetic hover -->
+              <a href="#pricing" class="btn btn-primary btn-energetic cta-pulse" id="ctaPricing"><i class="bi bi-cart-check me-2" aria-hidden="true"></i>Pakketten</a>
+              <a href="#portfolio" class="btn btn-outline-secondary btn-energetic" id="ctaPortfolio"><i class="bi bi-stars me-2" aria-hidden="true"></i>Bekijk werk</a>
+            </div>
+            <div class="tech-tags mt-4 reveal-up" style="--reveal-delay:320ms">
+              <span>Bootstrap</span>
+              <span>GSAPstyle Anim</span>
+              <span>SEO</span>
+              <span>PWAready</span>
+            </div>
+            <!-- ARIA live region for announcements (polite) -->
+            <div id="announcer" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
           </div>
-          <div class="tech-tags mt-4 reveal-up" style="--reveal-delay:320ms">
-            <span>Bootstrap</span>
-            <span>GSAP‑style Anim</span>
-            <span>SEO</span>
-            <span>PWA‑ready</span>
+        </div>
+        <div class="col-lg-6 hero-right d-none d-lg-flex justify-content-center align-items-center">
+          <!-- Right visual: large logo/illustration or interactive art -->
+          <div class="hero-art" aria-hidden="true">
+            <img src="assets/img/logo.svg" alt="" width="420" height="420" class="img-fluid logo-art"/>
           </div>
         </div>
       </div>
     </div>
-    <a href="#portfolio" class="scroll-down"><i class="bi bi-chevron-double-down"></i></a>
+    <a href="#portfolio" class="scroll-down" aria-label="Scroll to portfolio"><i class="bi bi-chevron-double-down" aria-hidden="true"></i></a>
   </header>
 
   <!-- Portfolio -->
@@ -90,15 +159,15 @@
         <div class="col-md-6 col-lg-4 reveal-fade">
           <div class="card shadow-sm h-100">
             <div class="card-img-top ratio ratio-16x9 placeholder-glow">
-              <div class="placeholder col-12 h-100 rounded-top"></div>
+              <img src="https://picsum.photos/seed/plumber/800/450" alt="Voorbeeld Van Dijk Loodgieters" class="card-img-top-img">
             </div>
-            <div class="card-body">
-              <h5 class="card-title">Nebula Commerce</h5>
-              <p class="card-text text-muted-neo">Headless e‑commerce met ultralichte UI en micro‑animaties.</p>
+            <div class="card-body position-relative">
+              <h5 class="card-title">Van Dijk Loodgieters</h5>
+              <p class="card-text text-muted-neo">24/7 lekkage- & sanitairservice — snel ter plaatse.</p>
+              <a href="/site1/index.html" class="stretched-link" aria-label="Bekijk Van Dijk Loodgieters">&nbsp;</a>
             </div>
             <div class="card-footer d-flex justify-content-between align-items-center bg-body">
-              <span class="badge bg-secondary-subtle text-body-secondary">Next.js</span>
-              <a href="#contact" class="stretched-link link-primary">Vraag demo</a>
+              <span class="badge bg-secondary-subtle text-body-secondary">Service</span>
             </div>
           </div>
         </div>
@@ -106,15 +175,15 @@
         <div class="col-md-6 col-lg-4 reveal-fade" style="--reveal-delay:100ms">
           <div class="card shadow-sm h-100">
             <div class="card-img-top ratio ratio-16x9 placeholder-glow">
-              <div class="placeholder col-12 h-100 rounded-top"></div>
+              <img src="https://picsum.photos/seed/recruit/800/450" alt="Voorbeeld NovaRecruit" class="card-img-top-img">
             </div>
-            <div class="card-body">
-              <h5 class="card-title">Quantum Portfolio</h5>
-              <p class="card-text text-muted-neo">Ultra‑snel portfolio met 100/100 Lighthouse scores.</p>
+            <div class="card-body position-relative">
+              <h5 class="card-title">NovaRecruit</h5>
+              <p class="card-text text-muted-neo">Recruitment & executive search — top talent voor jouw team.</p>
+              <a href="/site2/index.html" class="stretched-link" aria-label="Bekijk NovaRecruit">&nbsp;</a>
             </div>
             <div class="card-footer d-flex justify-content-between align-items-center bg-body">
-              <span class="badge bg-secondary-subtle text-body-secondary">Astro</span>
-              <a href="#contact" class="stretched-link link-primary">Vraag demo</a>
+              <span class="badge bg-secondary-subtle text-body-secondary">Agency</span>
             </div>
           </div>
         </div>
@@ -122,15 +191,15 @@
         <div class="col-md-6 col-lg-4 reveal-fade" style="--reveal-delay:200ms">
           <div class="card shadow-sm h-100">
             <div class="card-img-top ratio ratio-16x9 placeholder-glow">
-              <div class="placeholder col-12 h-100 rounded-top"></div>
+              <img src="https://picsum.photos/seed/salon/800/450" alt="Voorbeeld Salon Belle" class="card-img-top-img">
             </div>
-            <div class="card-body">
-              <h5 class="card-title">Aether SaaS</h5>
-              <p class="card-text text-muted-neo">SaaS‑landing met glas‑morphism en scroll‑animaties.</p>
+            <div class="card-body position-relative">
+              <h5 class="card-title">Salon Belle</h5>
+              <p class="card-text text-muted-neo">Kapper & styling — moderne looks en persoonlijke verzorging.</p>
+              <a href="/site3/index.html" class="stretched-link" aria-label="Bekijk Salon Belle">&nbsp;</a>
             </div>
             <div class="card-footer d-flex justify-content-between align-items-center bg-body">
-              <span class="badge bg-secondary-subtle text-body-secondary">Bootstrap</span>
-              <a href="#contact" class="stretched-link link-primary">Vraag demo</a>
+              <span class="badge bg-secondary-subtle text-body-secondary">Salon</span>
             </div>
           </div>
         </div>
@@ -156,9 +225,9 @@
               </div>
               <p class="text-muted-neo">Onepager of kleine site. Snel online.</p>
               <ul class="list-unstyled small flex-grow-1">
-                <li><i class="bi bi-check2 me-2 text-success"></i>Ontwerp + bouw</li>
-                <li><i class="bi bi-check2 me-2 text-success"></i>Basis SEO</li>
-                <li><i class="bi bi-check2 me-2 text-success"></i>1 ronde revisie</li>
+                <li><i class="bi bi-check2 me-2 text-success" aria-hidden="true"></i>Ontwerp + bouw</li>
+                <li><i class="bi bi-check2 me-2 text-success" aria-hidden="true"></i>Basis SEO</li>
+                <li><i class="bi bi-check2 me-2 text-success" aria-hidden="true"></i>1 ronde revisie</li>
               </ul>
               <a href="#contact" class="btn btn-outline-secondary w-100 mt-2">Start met Starter</a>
             </div>
@@ -174,10 +243,10 @@
               </div>
               <p class="text-muted-neo">Meest gekozen. Sterk merk + conversie.</p>
               <ul class="list-unstyled small flex-grow-1">
-                <li><i class="bi bi-check2 me-2 text-success"></i>Custom design (3-6 pagina's)</li>
-                <li><i class="bi bi-check2 me-2 text-success"></i>Performance optimalisatie</li>
-                <li><i class="bi bi-check2 me-2 text-success"></i>2 rondes revisie</li>
-                <li><i class="bi bi-check2 me-2 text-success"></i>Basis CMS optioneel</li>
+                <li><i class="bi bi-check2 me-2 text-success" aria-hidden="true"></i>Custom design (3-6 pagina's)</li>
+                <li><i class="bi bi-check2 me-2 text-success" aria-hidden="true"></i>Performance optimalisatie</li>
+                <li><i class="bi bi-check2 me-2 text-success" aria-hidden="true"></i>2 rondes revisie</li>
+                <li><i class="bi bi-check2 me-2 text-success" aria-hidden="true"></i>Basis CMS optioneel</li>
               </ul>
               <a href="#contact" class="btn btn-primary w-100 mt-2">Ga voor Pro</a>
             </div>
@@ -193,10 +262,10 @@
               </div>
               <p class="text-muted-neo">Volledig maatwerk, schaalbaar en uniek.</p>
               <ul class="list-unstyled small flex-grow-1">
-                <li><i class="bi bi-check2 me-2 text-success"></i>Design sprint + UX</li>
-                <li><i class="bi bi-check2 me-2 text-success"></i>Complexe componenten</li>
-                <li><i class="bi bi-check2 me-2 text-success"></i>Integraties en CMS</li>
-                <li><i class="bi bi-check2 me-2 text-success"></i>Launch + support</li>
+                <li><i class="bi bi-check2 me-2 text-success" aria-hidden="true"></i>Design sprint + UX</li>
+                <li><i class="bi bi-check2 me-2 text-success" aria-hidden="true"></i>Complexe componenten</li>
+                <li><i class="bi bi-check2 me-2 text-success" aria-hidden="true"></i>Integraties en CMS</li>
+                <li><i class="bi bi-check2 me-2 text-success" aria-hidden="true"></i>Launch + support</li>
               </ul>
               <a href="#contact" class="btn btn-outline-secondary w-100 mt-2">Plan een call</a>
             </div>
@@ -217,7 +286,7 @@
         <div class="col-md-6 reveal-fade">
           <div class="card h-100 shadow-sm border-0 p-4">
             <div class="d-flex align-items-center mb-3">
-              <img alt="avatar" src="https://i.pravatar.cc/64?img=12" class="rounded-circle me-3" width="48" height="48"/>
+              <img alt="Sanne de Jong — avatar" src="https://i.pravatar.cc/64?img=12" class="rounded-circle me-3" width="48" height="48" loading="lazy"/>
               <div>
                 <div class="fw-semibold">Sanne de Jong</div>
                 <div class="small text-muted-neo">Founder, Nebula</div>
@@ -229,7 +298,7 @@
         <div class="col-md-6 reveal-fade" style="--reveal-delay:100ms">
           <div class="card h-100 shadow-sm border-0 p-4">
             <div class="d-flex align-items-center mb-3">
-              <img alt="avatar" src="https://i.pravatar.cc/64?img=5" class="rounded-circle me-3" width="48" height="48"/>
+              <img alt="Mark Visser — avatar" src="https://i.pravatar.cc/64?img=5" class="rounded-circle me-3" width="48" height="48" loading="lazy"/>
               <div>
                 <div class="fw-semibold">Mark Visser</div>
                 <div class="small text-muted-neo">CMO, Aether</div>
@@ -241,7 +310,7 @@
         <div class="col-md-6 reveal-fade" style="--reveal-delay:200ms">
           <div class="card h-100 shadow-sm border-0 p-4">
             <div class="d-flex align-items-center mb-3">
-              <img alt="avatar" src="https://i.pravatar.cc/64?img=32" class="rounded-circle me-3" width="48" height="48"/>
+              <img alt="Lotte Bakker — avatar" src="https://i.pravatar.cc/64?img=32" class="rounded-circle me-3" width="48" height="48" loading="lazy"/>
               <div>
                 <div class="fw-semibold">Lotte Bakker</div>
                 <div class="small text-muted-neo">Owner, Studio Lotte</div>
@@ -253,7 +322,7 @@
         <div class="col-md-6 reveal-fade" style="--reveal-delay:300ms">
           <div class="card h-100 shadow-sm border-0 p-4">
             <div class="d-flex align-items-center mb-3">
-              <img alt="avatar" src="https://i.pravatar.cc/64?img=15" class="rounded-circle me-3" width="48" height="48"/>
+              <img alt="Yusuf El Amrani — avatar" src="https://i.pravatar.cc/64?img=15" class="rounded-circle me-3" width="48" height="48" loading="lazy"/>
               <div>
                 <div class="fw-semibold">Yusuf El Amrani</div>
                 <div class="small text-muted-neo">Co‑founder, Quantum</div>
@@ -295,7 +364,7 @@
   </section>
 
   <!-- Floating CTA Button -->
-  <a href="#contact" class="floating-cta btn btn-primary btn-lg" aria-label="Neem contact op"><i class="bi bi-lightning-charge me-2"></i>Offerte</a>
+            <a href="#contact" class="floating-cta btn btn-primary btn-lg" aria-label="Neem contact op"><i class="bi bi-lightning-charge me-2" aria-hidden="true"></i>Offerte</a>
 
   <!-- Contact Modal (opens from links if needed) -->
   <div class="modal fade" id="contactModal" tabindex="-1" aria-hidden="true">
@@ -338,28 +407,28 @@
       <div class="row g-4">
         <div class="col-md-6 col-lg-3 reveal-fade">
           <div class="card h-100 shadow-sm border-0 p-4">
-            <i class="bi bi-cpu"></i>
+            <i class="bi bi-cpu" aria-hidden="true"></i>
             <h5>Webdesign</h5>
             <p>Unieke, futuristische ontwerpen met focus op merkbeleving.</p>
           </div>
         </div>
         <div class="col-md-6 col-lg-3 reveal-fade" style="--reveal-delay:100ms">
           <div class="card h-100 shadow-sm border-0 p-4">
-            <i class="bi bi-rocket-takeoff"></i>
+            <i class="bi bi-rocket-takeoff" aria-hidden="true"></i>
             <h5>Ontwikkeling</h5>
             <p>Schaalbare front‑ends met moderne toolchains en best practices.</p>
           </div>
         </div>
         <div class="col-md-6 col-lg-3 reveal-fade" style="--reveal-delay:200ms">
           <div class="card h-100 shadow-sm border-0 p-4">
-            <i class="bi bi-lightning-charge"></i>
+            <i class="bi bi-lightning-charge" aria-hidden="true"></i>
             <h5>Performance</h5>
             <p>Razendsnelle laadtijden, geoptimaliseerd voor SEO en Core Web Vitals.</p>
           </div>
         </div>
         <div class="col-md-6 col-lg-3 reveal-fade" style="--reveal-delay:300ms">
           <div class="card h-100 shadow-sm border-0 p-4">
-            <i class="bi bi-magic"></i>
+            <i class="bi bi-magic" aria-hidden="true"></i>
             <h5>Animaties</h5>
             <p>Smooth micro‑interactions en scroll‑reveals voor maximale impact.</p>
           </div>
@@ -378,9 +447,9 @@
             Lioro is mijn studio waar design en technologie elkaar ontmoeten. Ik bouw maatwerk websites die lichtgewicht, snel en visueel onderscheidend zijn. Geen templates — wel karakter.
           </p>
           <ul class="list-unstyled mt-3 small text-muted-neo reveal-up" style="--reveal-delay:220ms">
-            <li><i class="bi bi-check2-circle text-primary me-2"></i>Mobile‑first en toegankelijk</li>
-            <li><i class="bi bi-check2-circle text-primary me-2"></i>Moderne stack en tooling</li>
-            <li><i class="bi bi-check2-circle text-primary me-2"></i>Transparante samenwerking</li>
+            <li><i class="bi bi-check2-circle text-primary me-2" aria-hidden="true"></i>Mobile‑first en toegankelijk</li>
+            <li><i class="bi bi-check2-circle text-primary me-2" aria-hidden="true"></i>Moderne stack en tooling</li>
+            <li><i class="bi bi-check2-circle text-primary me-2" aria-hidden="true"></i>Transparante samenwerking</li>
           </ul>
         </div>
         <div class="col-lg-6">
@@ -390,7 +459,7 @@
                 <div class="h5 mb-0">Beschikbaar voor projecten</div>
                 <div class="small text-muted-neo">Gemiddelde doorlooptijd: 2‑6 weken</div>
               </div>
-              <a href="#contact" class="btn btn-primary btn-sm"><i class="bi bi-chat-dots me-1"></i>Plan call</a>
+              <a href="#contact" class="btn btn-primary btn-sm"><i class="bi bi-chat-dots me-1" aria-hidden="true"></i>Plan call</a>
             </div>
           </div>
         </div>
@@ -423,7 +492,7 @@
               </div>
             </div>
             <div class="d-flex align-items-center gap-3 mt-3">
-              <button class="btn btn-primary" type="submit"><i class="bi bi-send me-2"></i>Verstuur</button>
+              <button class="btn btn-primary" type="submit"><i class="bi bi-send me-2" aria-hidden="true"></i>Verstuur</button>
               <span id="formStatus" class="small text-muted-neo"></span>
             </div>
           </form>
@@ -434,14 +503,14 @@
               <div class="h5">Snel contact</div>
               <p class="text-muted-neo">Mail of stuur een bericht met je doelen en deadline.</p>
               <ul class="list-unstyled small text-muted-neo">
-                <li><i class="bi bi-envelope me-2 text-primary"></i>info@lioro.studio</li>
-                <li><i class="bi bi-geo-alt me-2 text-primary"></i>Nederland, remote</li>
+                <li><i class="bi bi-envelope me-2 text-primary" aria-hidden="true"></i>info@lioro.studio</li>
+                <li><i class="bi bi-geo-alt me-2 text-primary" aria-hidden="true"></i>Nederland, remote</li>
               </ul>
             </div>
             <div class="d-flex gap-3">
-              <a class="icon-link" href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-              <a class="icon-link" href="#" aria-label="GitHub"><i class="bi bi-github"></i></a>
-              <a class="icon-link" href="#" aria-label="Dribbble"><i class="bi bi-dribbble"></i></a>
+              <a class="icon-link" href="#" aria-label="LinkedIn"><i class="bi bi-linkedin" aria-hidden="true"></i></a>
+              <a class="icon-link" href="#" aria-label="GitHub"><i class="bi bi-github" aria-hidden="true"></i></a>
+              <a class="icon-link" href="#" aria-label="Dribbble"><i class="bi bi-dribbble" aria-hidden="true"></i></a>
             </div>
           </div>
         </div>
@@ -456,8 +525,8 @@
     </div>
   </footer>
 
-  <!-- JS: Bootstrap, Main -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  <script src="assets/js/main.js"></script>
+  <!-- JS: Bootstrap, Main (deferred) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script defer src="assets/js/main.js"></script>
 </body>
 </html>

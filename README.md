@@ -31,3 +31,14 @@ Externe CDN's:
 
 ## Licentie
 Vrij te gebruiken en aan te passen voor je eigen portfolio.
+
+## Toegankelijkheid & Reduced Motion
+
+De site respecteert gebruikersvoorkeuren voor bewegingsreductie en biedt een site-brede override:
+
+- Er is een kleine toggle in de navigatie (knop met id `motionToggle`) waarmee bezoekers animaties kunnen aan- of uitzetten.
+- De keuze wordt opgeslagen in `localStorage` onder de sleutel `reduced-motion` als `true` of `false`.
+- Wanneer animaties uitgeschakeld zijn, wordt er de CSS-class `reduced-motion` op het `<html>` element gezet. Er is ook een `@media (prefers-reduced-motion: reduce)` query in `assets/css/styles.css` die OS-voorkeur respecteert.
+- Voor ontwikkelaars: de typewriter en CTA-pulse worden aangestuurd in `assets/js/main.js`. Het script checkt zowel OS-voorkeur als de opgeslagen gebruikersoverride en past gedrag daarop aan.
+
+Dit voorkomt bewegingsgerelateerde klachten en geeft gebruikers controle over animaties zonder de site-ervaring te breken.
