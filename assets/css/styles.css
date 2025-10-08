@@ -1,15 +1,19 @@
 :root{
-  --bg:#0b0f14;
-  --bg-alt:#0e141b;
-  --text:#d7e1ec;
-  --muted:#9fb3c8;
-  --border:rgba(255,255,255,0.12);
-  --shadow:0 10px 20px rgba(0,0,0,.4);
+  /* Tuned Yellow / Black theme (warmer, slightly softer) */
+  --brand-yellow: #FFC83D; /* tuned primary accent (default) */
+  --brand-yellow-strong: #FFB300; /* stronger accent for highlights */
+  --brand-yellow-soft: #FFE27A; /* soft variant for subtle backgrounds */
+  --bg: #000000; /* page background */
+  --bg-alt: #0a0a0a; /* slightly lighter for panels */
+  --text: #f6f4ea; /* off-white for readable text */
+  --muted: #e6ddb2; /* muted yellow-ish */
+  --border: rgba(255,200,30,0.12);
+  --shadow: 0 10px 20px rgba(0,0,0,.6);
 }
 
 html,body{height:100%}
 body{
-  background: radial-gradient(80vw 50vh at 85% 5%, rgba(255,255,255,0.04), transparent 60%),
+  background: radial-gradient(80vw 50vh at 85% 5%, rgba(255,212,0,0.04), transparent 60%),
               linear-gradient(180deg, var(--bg), var(--bg-alt));
   color:var(--text);
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
@@ -17,8 +21,13 @@ body{
 
 
 /* Navbar */
-.brand-wordmark{font-family: Orbitron, Inter, sans-serif; letter-spacing:.06em}
-.logo-glow{width:10px; height:10px; border-radius:50%; display:inline-block; background:currentColor}
+.brand-wordmark{font-family: Orbitron, Inter, sans-serif; letter-spacing:.06em; color:var(--text)}
+/* Logo: support both the previous decorative element and the new <img> logo
+  - .logo-glow without src keeps the decorative gradient (backwards compatible)
+  - elements with a src attribute (the <img>) get object-fit and rounded corners */
+.logo-glow{display:inline-block; width:36px; height:36px}
+.logo-glow[src]{display:inline-block; width:36px; height:36px; object-fit:cover; border-radius:8px}
+.logo-glow.no-img{background:linear-gradient(180deg, var(--brand-yellow), #ffde59); clip-path: polygon(50% 0%, 62% 35%, 98% 35%, 70% 57%, 79% 100%, 50% 72%, 21% 100%, 30% 57%, 2% 35%, 38% 35%); box-shadow:0 6px 18px rgba(255,212,0,.18)}
 
 /* Sections */
 .section-padding{padding: 96px 0}
@@ -29,10 +38,8 @@ body{
 .text-muted-neo{color:var(--muted)}
 .text-gradient{color:inherit}
 
-/* Buttons: use Bootstrap defaults */
-
 /* Cards / glass */
-.card{border-radius: 0.75rem}
+.card{border-radius: 0.75rem; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid var(--border)}
 
 /* Hero */
 header#hero{padding-top:96px}
@@ -41,13 +48,27 @@ header#hero{padding-top:96px}
 .hero-title{font-family: Orbitron, Inter, sans-serif; letter-spacing:.04em; font-weight:800; line-height:0.95;
   font-size: clamp(3rem, 10vw, 8.5rem); position:relative; z-index:1;
 }
-.hero-title::before{content: attr(data-watermark); position:absolute; left:50%; top:50%; transform:translate(-50%, -68%);
-  pointer-events:none; user-select:none; z-index:-1; white-space:nowrap; text-align:center;
-  font-family: Orbitron, Inter, sans-serif; font-weight:800; letter-spacing:.12em;
-  color: rgba(255,255,255,0.04); font-size: clamp(6rem, 18vw, 22rem); line-height:1}
+.hero-title::before{
+  content: attr(data-watermark);
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%, -68%);
+  pointer-events:none;
+  user-select:none;
+  z-index:-1;
+  white-space:nowrap;
+  text-align:center;
+  font-family: Orbitron, Inter, sans-serif;
+  font-weight:800;
+  letter-spacing:.12em;
+  color: rgba(255,255,255,0.04);
+  font-size: clamp(6rem, 18vw, 22rem);
+  line-height:1;
+}
 .accent-underline{position:relative; display:inline-block}
-.accent-underline::after{content:""; position:absolute; left:0; right:10%; bottom:-10px; height:6px; border-radius:4px;
-  background: linear-gradient(90deg, #0dcaf0, #6f42c1); opacity:.6}
+.accent-underline::after{content:""; position:absolute; left:0; right:10%; bottom:-10px; height:8px; border-radius:4px;
+  background: linear-gradient(90deg, var(--brand-yellow), var(--brand-yellow-soft)); opacity:.95; display:block}
 
 /* Watermark is now rendered by .hero-title::before */
 
@@ -57,14 +78,12 @@ header#hero{padding-top:96px}
 /* Feature cards: icons sizing */
 .card i{font-size:28px}
 
-/* About panel removed in favor of card */
-
 /* Form */
 /* use Bootstrap form styles */
 
 /* Tech tags */
 .tech-tags{display:flex; flex-wrap:wrap; gap:10px}
-.tech-tags span{font-size:12px; color:inherit; border:1px dashed rgba(127,127,127,.45); padding:6px 10px; border-radius:999px; background:transparent}
+.tech-tags span{font-size:12px; color:var(--text); border:1px dashed rgba(255,212,0,.18); padding:6px 10px; border-radius:999px; background:transparent}
 
 /* Reveal animations */
 .reveal-up{opacity:0; transform:translateY(14px); transition:opacity .7s ease, transform .7s ease;}
@@ -83,13 +102,51 @@ footer{background:transparent}
 *::-webkit-scrollbar-track{background:rgba(127,127,127,.15)}
 
 /* Pricing */
-.pricing-card{border:1px solid rgba(255,255,255,0.08); box-shadow: var(--shadow);}
-.pricing-card .price{font-weight:800; font-size:1.25rem}
-.pricing-card.featured{position:relative; border-color: rgba(13,202,240,.4); box-shadow:0 10px 30px rgba(13,202,240,.15)}
+.pricing-card{border:1px solid rgba(255,200,30,0.06); box-shadow: var(--shadow);} 
+.pricing-card .price{font-weight:800; font-size:1.25rem; color:var(--brand-yellow-strong)}
+.pricing-card.featured{position:relative; border-color: rgba(255,200,30,0.18); box-shadow:0 10px 30px rgba(255,200,30,.06)}
 .pricing-card.featured::after{content:"Meest gekozen"; position:absolute; top:12px; right:12px; font-size:.75rem; letter-spacing:.04em;
-  background:linear-gradient(90deg, rgba(13,202,240,.15), rgba(111,66,193,.15)); color:#9fdff0; border:1px solid rgba(13,202,240,.35);
+  background:linear-gradient(90deg, rgba(255,200,30,.08), rgba(255,222,89,.06)); color:var(--brand-yellow-strong); border:1px solid rgba(255,200,30,.18);
   padding:4px 8px; border-radius:999px}
 
 /* Floating CTA */
-.floating-cta{position:fixed; right:24px; bottom:24px; z-index:1030; box-shadow:0 10px 24px rgba(0,0,0,.4)}
-.floating-cta:hover{transform:translateY(-1px)}
+.floating-cta{position:fixed; right:24px; bottom:24px; z-index:1030; background:linear-gradient(180deg,var(--brand-yellow),#ffde59); color:#000; border:none; box-shadow:0 10px 24px rgba(0,0,0,.6)}
+.floating-cta:hover{transform:translateY(-2px); box-shadow:0 16px 36px rgba(0,0,0,.6)}
+
+/* CTA micro-interactions */
+.floating-cta, .btn-primary{transition:transform .14s ease, box-shadow .14s ease, background-color .12s ease}
+.floating-cta:active, .btn-primary:active{transform:translateY(0)}
+.btn-primary:hover{transform:translateY(-2px)}
+
+/* Focus styles for accessibility */
+:focus{outline: none}
+:focus-visible{outline: 3px solid rgba(255,212,0,0.18); outline-offset:3px}
+.btn-primary:focus-visible, .floating-cta:focus-visible, .navbar-toggler:focus-visible, .nav-link:focus-visible{
+  outline: 3px solid rgba(255,212,0,0.22);
+  outline-offset:3px;
+}
+
+/* Logo hover */
+.logo-glow:hover{transform:translateY(-2px) scale(1.02); transition:transform .18s ease}
+
+/* Buttons and links using brand color */
+.btn-primary{background:var(--brand-yellow); border-color:rgba(0,0,0,0.12); color:#000}
+.btn-primary:hover, .btn-primary:focus{background:#ffde59}
+.btn-outline-secondary{color:var(--brand-yellow); border-color:rgba(255,212,0,0.14)}
+.link-primary{color:var(--brand-yellow)}
+
+/* Navbar adjustments: keep dark but highlight brand */
+.navbar-dark .navbar-nav .nav-link{color:var(--text)}
+.navbar{background:linear-gradient(180deg, #070707, #0b0b0b)}
+.navbar-brand .brand-wordmark{color:var(--brand-yellow)}
+
+.badge.bg-secondary-subtle{background:rgba(255,255,255,0.04); color:var(--muted)}
+/* Ensure badges using text-body-secondary remain readable on dark backgrounds */
+.badge.bg-secondary-subtle.text-body-secondary{color:var(--text); opacity:0.9}
+
+/* Card footer background (bg-body) can be nearly transparent; enforce readable text color */
+.bg-body{background: rgba(255,255,255,0.02) !important}
+.bg-body .text-body-secondary, .bg-body .link-primary{color:var(--text) !important}
+
+/* Improve contrast for icons that used text-primary */
+.text-primary, .bi-check2-circle{color:var(--brand-yellow) !important}
